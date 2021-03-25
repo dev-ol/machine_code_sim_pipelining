@@ -1,0 +1,14 @@
+memory[0]=1638402
+memory[1]=25165824
+		instruction memory:
+			memory[2]=0
+			memory[2]=0
+
+opcode : 32724
+ --------------opcode :  0 --------------
+-------------- rega 3, regb 1 --------------
+opcode : 1638402
+ --------------opcode :  6 --------------
+-------------- rega 0, regb 0 --------------
+opcode : 25165824machine halted
+total of 2 cycles executed
