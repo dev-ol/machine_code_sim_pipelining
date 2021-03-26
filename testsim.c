@@ -139,7 +139,6 @@ int main(int argc, char *argv[])
 
     }
 
-    // performTask(&state);
 
     run(state);
 
@@ -155,7 +154,6 @@ void run(stateType state) {
 
         printState(&state);
 
-        // printf("\nopcode : %d", state.MEMWB.instr);
         /* check for halt */
         if (opcode(state.MEMWB.instr) == HALT) {
             printf("machine halted\n");
@@ -184,7 +182,6 @@ void run(stateType state) {
 
         WBEND(state,&newState);
 
-        //for now
         state = newState; /* this is the last statement before end of the loop.
                     It marks the end of the cycle and updates the
                     current state with the values calculated in this
@@ -192,7 +189,7 @@ void run(stateType state) {
     }
 }
 
-
+//alu use to do the calculation
 void ALU(stateType state, stateType * newState) {
 
     int code = opcode(state.IDEX.instr);
@@ -203,6 +200,7 @@ void ALU(stateType state, stateType * newState) {
     }
     else if (NAND == code)
     {
+        //There is an issue with the nand. only get -1 or 0
         (*newState).EXMEM.aluResult = ~((*newState).IDEX.readRegA & (*newState).IDEX.readRegB);
     }
     else if (LW == code || SW == code )
@@ -212,9 +210,10 @@ void ALU(stateType state, stateType * newState) {
     } else if(BEQ == code ) {
 
         (*newState).EXMEM.aluResult = (*newState).IDEX.readRegA == (*newState).IDEX.readRegB;
-    } 
+    }
 }
 
+//get data from memory
 void DataMemory(stateType state, stateType * newState) {
 
     int code = opcode(state.EXMEM.instr);
@@ -237,6 +236,7 @@ void DataMemory(stateType state, stateType * newState) {
     }
 }
 
+//write back data to the memory
 void WriteBack(stateType  state, stateType * newState ) {
 
     int code = opcode((* newState).WBEND.instr);
@@ -259,16 +259,16 @@ void WriteBack(stateType  state, stateType * newState ) {
 
 }
 
+//IF stage
 void IFID(stateType  state, stateType * newState) {
 
     (*newState).IFID.pcPlus1 = state.pc + 1;
     (*newState).IFID.instr =  state.instrMem[ state.pc];
 
     (*newState).pc=state.pc + 1;
-
-
 }
 
+//ID stage
 void IDEX(stateType  state, stateType * newState) {
 
     (*newState).IDEX.pcPlus1 = state.IFID.pcPlus1;
@@ -293,6 +293,7 @@ void IDEX(stateType  state, stateType * newState) {
 
 }
 
+//EX stage
 void EXMEM(stateType  state, stateType * newState) {
 
     (*newState).EXMEM.instr =   state.IDEX.instr;
@@ -312,11 +313,15 @@ void EXMEM(stateType  state, stateType * newState) {
         (*newState).EXMEM.instr = NOOPINSTRUCTION;
     }
 }
+
+//MEM stage
 void MEMWB(stateType  state, stateType * newState) {
 
     (*newState).MEMWB.instr =  state.EXMEM.instr;
     DataMemory(state,newState);
 }
+
+//WB stage
 void WBEND(stateType  state, stateType * newState) {
 
     (*newState).WBEND.instr =  state.MEMWB.instr;
@@ -324,6 +329,7 @@ void WBEND(stateType  state, stateType * newState) {
     WriteBack(state, newState);
 }
 
+//check for hazard with LW and stall
 int stallHazard(stateType  state, stateType * newState) {
 
     int nRegA = field0( (*newState).IDEX.instr );
@@ -334,6 +340,8 @@ int stallHazard(stateType  state, stateType * newState) {
     return(((nRegA == destReg) || (nRegB == destReg)) && (code == LW));
 }
 
+//check for data hazard for instructions that
+//need data from recent calculation and return it before write back
 void forwardHazard(stateType  state, stateType * newState) {
 
     int nRegA = field0(state.IDEX.instr);
@@ -342,25 +350,31 @@ void forwardHazard(stateType  state, stateType * newState) {
     checkWBEND(state, newState, nRegA, nRegB);
     checkMEMWB(state, newState, nRegA, nRegB);
     checkEXMEM(state, newState, nRegA, nRegB);
-
 }
 
+// check for hazard with beq 
 int specSquashHazard(stateType  state, stateType * newState) {
- 
+
     int code = opcode(state.EXMEM.instr);
     int aluR = state.EXMEM.aluResult;
 
     return (code == BEQ && aluR == 1);
 }
 
+//check for hazard in WB stage
 void checkWBEND(stateType  state, stateType * newState, int nRegA, int nRegB) {
     int code =opcode(state.WBEND.instr);
 
     if(code == LW) {
         int destReg = field1(state.WBEND.instr);
+
+         //compare regA with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegA, destReg,
                    & (*newState).IDEX.readRegA, state.WBEND.writeData );
 
+         //compare regB with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegB, destReg,
                    &(*newState).IDEX.readRegB, state.WBEND.writeData );
 
@@ -368,14 +382,20 @@ void checkWBEND(stateType  state, stateType * newState, int nRegA, int nRegB) {
 
         int destReg = field2(state.WBEND.instr);
 
+        //compare regA with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegA, destReg,
                    &(*newState).IDEX.readRegA, state.WBEND.writeData );
-
+        
+        //compare regB with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegB, destReg,
                    &(*newState).IDEX.readRegB, state.WBEND.writeData );
-    } 
+    }
 
 }
+
+//check for hazard in MEM stage
 void checkMEMWB(stateType  state, stateType * newState,  int nRegA, int nRegB) {
 
     int code =opcode(state.MEMWB.instr);
@@ -383,9 +403,13 @@ void checkMEMWB(stateType  state, stateType * newState,  int nRegA, int nRegB) {
     if(code == LW) {
         int destReg = field1(state.MEMWB.instr);
 
+         //compare regA with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegA, destReg,
                    & (*newState).IDEX.readRegA, state.MEMWB.writeData );
 
+         //compare regB with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegB, destReg,
                    &(*newState).IDEX.readRegB, state.MEMWB.writeData );
 
@@ -393,14 +417,19 @@ void checkMEMWB(stateType  state, stateType * newState,  int nRegA, int nRegB) {
 
         int destReg = field2(state.MEMWB.instr);
 
+         //compare regA with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegA, destReg,
                    &(*newState).IDEX.readRegA, state.MEMWB.writeData );
 
+        //compare regB with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegB, destReg,
                    &(*newState).IDEX.readRegB, state.MEMWB.writeData );
-    } 
+    }
 }
 
+//check for hazard in EX stage
 void checkEXMEM(stateType  state, stateType * newState,  int nRegA, int nRegB ) {
     int code = opcode(state.EXMEM.instr);
 
@@ -409,15 +438,21 @@ void checkEXMEM(stateType  state, stateType * newState,  int nRegA, int nRegB ) 
         //getting the  destination register
         int destReg = field2(state.EXMEM.instr);
 
+        //compare regA with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegA, destReg,
                    &(*newState).IDEX.readRegA, state.EXMEM.aluResult );
 
+        //compare regB with the destReg and then store 
+        //write data in needed instruction register
         compareSet(nRegB, destReg,
                    &(*newState).IDEX.readRegB, state.EXMEM.aluResult );
-    } 
+    }
 }
 
 //utilities
+
+//clear registers
 void clearRegisters(stateType *statePtr)
 {
 
@@ -428,7 +463,7 @@ void clearRegisters(stateType *statePtr)
     }
 }
 
-
+//comparsion and set function
 void compareSet(int Lreg, int Rreg, int * sR,  int iR ) {
 
     if(Lreg == Rreg) {
@@ -436,7 +471,7 @@ void compareSet(int Lreg, int Rreg, int * sR,  int iR ) {
     }
 }
 
-
+//get the registers and return the offset
 int getRegisters(int instruction, int * regA, int * regB) {
 
     (*regA) = field0(instruction);
@@ -458,6 +493,7 @@ int convertNum(int num)
     return (num);
 }
 
+//set initial state
 void setInitialState(stateType *state) {
     (*state).IFID.instr = NOOPINSTRUCTION;
     (*state).IDEX.instr  = NOOPINSTRUCTION;
