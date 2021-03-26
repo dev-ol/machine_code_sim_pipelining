@@ -85,6 +85,7 @@ void MEMWB(stateType  state, stateType * newState);
 void WBEND(stateType  state, stateType * newState);
 int stallHazard(stateType  state, stateType * newState);
 void forwardHazard(stateType  state, stateType * newState);
+int specSquashHazard(stateType  state, stateType * newState);
 void checkWBEND(stateType  state, stateType * newState, int nRegA, int nRegB);
 void checkEXMEM(stateType  state, stateType * newState,  int nRegA, int nRegB );
 void checkMEMWB(stateType  state, stateType * newState,  int nRegA, int nRegB);
@@ -232,6 +233,12 @@ void ALU(stateType state, stateType * newState) {
     } else if(BEQ == opcode ) {
 
         (*newState).EXMEM.aluResult = (*newState).IDEX.readRegA == (*newState).IDEX.readRegB;
+        
+         printf("\nBEQ Aalu %d ", (*newState).IDEX.readRegA );
+        printf("\nBEQ balu %d ", (*newState).IDEX.readRegB );
+        printf("\nBEQ  result %d ",(*newState).EXMEM.aluResult );
+        
+
     } else {
     }
 }
@@ -328,10 +335,11 @@ void IDEX(stateType  state, stateType * newState) {
         printf("\nyes\n");
         (*newState).IFID = state.IFID;
         (*newState).pc = state.pc;
-        (*newState).IDEX.instr =NOOPINSTRUCTION;
+        (*newState).IDEX.instr = NOOPINSTRUCTION;
     } else {
         printf("\nno\n");
     }
+    printf("offset %d !!",(*newState).IDEX.offset);
 
 }
 
@@ -341,12 +349,28 @@ void EXMEM(stateType  state, stateType * newState) {
 
     (*newState).EXMEM.instr =   state.IDEX.instr;
 
+    (*newState).EXMEM.branchTarget =   state.IDEX.pcPlus1 +  state.IDEX.offset;
     forwardHazard(state,newState);
 
-    (*newState).EXMEM.branchTarget =   state.IFID.pcPlus1 +  state.IDEX.offset;
+  printInstruction((*newState).EXMEM.instr);
+    printf("\n branch %d",   (*newState).EXMEM.branchTarget);
+    printf("\n branch 2 %d",   state.EXMEM.branchTarget);
+    printf("\n pcplus1 %d",  state.IDEX.pcPlus1);
+    printf("\n offset %d",  state.IDEX.offset);
+
+
     (*newState).EXMEM.readRegB =  state.IDEX.readRegB;
     printf("\n&&#regB %d",(*newState).IDEX.readRegB );
     ALU(state,newState);
+    
+     if(specSquashHazard(state, newState) == 1){
+        printf("\n specSquash if called i");
+        printf("\n branch target %d", (*newState).EXMEM.branchTarget);
+        (*newState).pc =   (*newState).EXMEM.branchTarget - 1;
+      (*newState).IFID.instr = NOOPINSTRUCTION;
+     (*newState).IDEX.instr = NOOPINSTRUCTION;
+     (*newState).EXMEM.instr = NOOPINSTRUCTION;
+    }
 }
 void MEMWB(stateType  state, stateType * newState) {
 
@@ -379,6 +403,14 @@ void forwardHazard(stateType  state, stateType * newState) {
     checkMEMWB(state, newState, nRegA, nRegB);
     checkEXMEM(state, newState, nRegA, nRegB);
 
+}
+
+int specSquashHazard(stateType  state, stateType * newState){
+    printf("\n specSquash called");
+    int code = opcode(state.EXMEM.instr);
+    int aluR = state.EXMEM.aluResult;
+
+    return (code == BEQ && aluR == 1);
 }
 
 void checkWBEND(stateType  state, stateType * newState, int nRegA, int nRegB) {
