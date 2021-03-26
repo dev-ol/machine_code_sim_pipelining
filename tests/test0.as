@@ -1,5 +1,10 @@
-	lw  0   1   data1   $1= mem[data1]
-	add 1 	1 	0
-	add 0 	1 	2
-	halt
-data1   .fill   12345
+     add 3 1 2
+     lw 0 1 x
+     noop
+     noop
+     add 1 2 3
+     noop
+     noop
+     nand 3 4 5
+done halt
+x     .fill 10

@@ -34,24 +34,24 @@ state before cycle 0 starts
 	IDEX:
 		instruction noop 0 0 0
 		pcPlus1 0
-		readRegA -726971928
-		readRegB 32730
-		offset -2068446044
+		readRegA -601138712
+		readRegB 32545
+		offset -1118778508
 	EXMEM:
 		instruction noop 0 0 0
-		branchTarget -727242264
-		aluResult 32730
-		readRegB -726971928
+		branchTarget -601409048
+		aluResult 32545
+		readRegB -601138712
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 	WBEND:
 		instruction noop 0 0 0
 		writeData 0
 offset 0 !!
  stallHazard called
 no
----offset -2068446044, code 7 !!
+---offset -1118778508, code 7 !!
 fwd called
  checkWBEND called
  checkMEMWB called
@@ -94,15 +94,15 @@ state before cycle 1 starts
 		offset 0
 	EXMEM:
 		instruction noop 0 0 0
-		branchTarget -2068446044
-		aluResult 32730
-		readRegB 32730
+		branchTarget -1118778508
+		aluResult 32545
+		readRegB 32545
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 	WBEND:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 offset 0 !!
  stallHazard called
 no
@@ -150,14 +150,14 @@ state before cycle 2 starts
 	EXMEM:
 		instruction noop 0 0 0
 		branchTarget 1
-		aluResult 32730
+		aluResult 32545
 		readRegB 0
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 	WBEND:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 offset 4 !!
  stallHazard called
 yes
@@ -212,10 +212,10 @@ state before cycle 3 starts
 		readRegB 0
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 	WBEND:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 offset 0 !!
  stallHazard called
 no
@@ -271,7 +271,7 @@ state before cycle 4 starts
 		writeData 12345
 	WBEND:
 		instruction noop 0 0 0
-		writeData -726969096
+		writeData -601135880
 offset 0 !!
  stallHazard called
 no
