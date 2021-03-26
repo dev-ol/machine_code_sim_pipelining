@@ -64,24 +64,31 @@ typedef struct stateStruct {
 
 
 void printState(stateType *);
-void performTask(stateType *statePtr);
 void addOp(stateType *state);
 int getBytes(int *instruction, int shiftAmount);
 int convertNum(int num);
-void nandOp(int instruction, stateType *stateType);
-void lwOp(int instruction, stateType *stateType);
-void swOp(int instruction, stateType *stateType);
-int beqOp(int instruction, stateType *stateType, int pc);
-int jalrOp(int instruction, stateType *stateType);
+
+
 
 void clearRegisters(stateType *statePtr);
 int getRegisters(int instruction, int * regA, int * regB);
 int getOpcode(int instruction);
 int getBytes(int *instruction, int shiftAmount);
-void ALU(stateType * state);
-void DataMemory(stateType * state);
-void WriteBack(stateType * state);
+void ALU(stateType state,stateType * newState);
+void DataMemory(stateType  state, stateType * newState);
+void WriteBack(stateType state, stateType * newState);
 void setInitialState(stateType *statePtr);
+void IFID(stateType  state, stateType * newState);
+void IDEX(stateType  state, stateType * newState);
+void EXMEM(stateType  state, stateType * newState);
+void MEMWB(stateType  state, stateType * newState);
+void WBEND(stateType  state, stateType * newState);
+int stallHazard(stateType  state, stateType * newState);
+void forwardHazard(stateType  state, stateType * newState);
+void checkWBEND(stateType  state, stateType * newState, int nRegA, int nRegB);
+void checkEXMEM(stateType  state, stateType * newState,  int nRegA, int nRegB );
+void checkMEMWB(stateType  state, stateType * newState,  int nRegA, int nRegB);
+void compareSet(int Lreg, int Rreg, int * sR, int iR);
 
 //default
 void run(stateType statePtr);
@@ -129,22 +136,23 @@ int main(int argc, char *argv[])
             exit(1);
         }
 
-       }
-        printf("\t\tinstruction memory:\n");
+    }
+    printf("\t\tinstruction memory:\n");
 
-    for(int i = 0; i < state.numMemory; i++ ){
-         printf("\t\t\tmemory[%d]=%d\n", state.numMemory, state.instrMem[state.numMemory]);
-    
+    for(int i = 0; i < state.numMemory; i++ ) {
+        printf("\t\t\tinstrMem[%d]", i );
+        printInstruction(state.instrMem[i]);
+
     }
 
-   // performTask(&state);
+    // performTask(&state);
 
-   run(state);
+    run(state);
 
     return (0);
 }
 
-void run(stateType state){
+void run(stateType state) {
 
     stateType newState;
     setInitialState(&state);
@@ -152,8 +160,8 @@ void run(stateType state){
     while (1) {
 
         printState(&state);
-        
-        printf("\nopcode : %d", state.MEMWB.instr);
+
+        // printf("\nopcode : %d", state.MEMWB.instr);
         /* check for halt */
         if (opcode(state.MEMWB.instr) == HALT) {
             printf("machine halted\n");
@@ -165,134 +173,296 @@ void run(stateType state){
         newState.cycles++;
 
         /* --------------------- IF stage --------------------- */
-        //newState.IFID.pcPlus1++;
-        //newState.IFID.instr = newState.instrMem[newState.pc];
-        // printf("\nopcode : %d", newState.IFID.instr);
-        //read register file and store it regs
-        IFID(&newState);
+
+        IFID(state, &newState);
+
         /* --------------------- ID stage --------------------- */
 
-        newState.IFID.pcPlus1++;
-        newState.IDEX.instr =  newState.IFID.instr;
-        int offset = getRegisters(newState.IDEX.instr, & newState.IDEX.readRegA,& newState.IDEX.readRegB );
-
-        //read register file and store it IDEX ref
-         newState.IDEX.readRegA = newState.reg[newState.IDEX.readRegA];
-         newState.IDEX.readRegB = newState.reg[newState.IDEX.readRegB];
-         newState.IDEX.offset = offset;
-            //  printf("\nopcode : %d", newState.IDEX.instr);
+        IDEX(state,&newState);
         /* --------------------- EX stage --------------------- */
-        newState.EXMEM.branchTarget =  newState.IFID.pcPlus1 + newState.IDEX.offset;
-        newState.EXMEM.instr =  newState.IDEX.instr;
-        newState.EXMEM.readRegB = newState.IDEX.readRegB;
-        ALU(&newState);
-             // printf("\nopcode : %d", newState.EXMEM.instr);
-      
-        /* --------------------- MEM stage --------------------- */
 
-        newState.MEMWB.instr = newState.EXMEM.instr;
-        DataMemory(&newState);
-            //  printf("\nopcode : %d", newState.MEMWB.instr);
+        EXMEM(state,&newState);
+        /* --------------------  - MEM stage --------------------- */
 
+
+        MEMWB(state,&newState);
         /* --------------------- WB stage --------------------- */
-        newState.WBEND.instr = newState.MEMWB.instr;
-        WriteBack(&newState);
 
-             // printf("\nopcode : %d", newState.WBEND.instr);
+        WBEND(state,&newState);
+
         //for now
         state = newState; /* this is the last statement before end of the loop.
                     It marks the end of the cycle and updates the
                     current state with the values calculated in this
                     cycle */
-        state.pc++;
-       //printf("\nnew opcode : %d", state.MEMWB.instr);
+
+        //printf("\nnew opcode : %d", state.MEMWB.instr);
     }
 }
 
 
-void ALU(stateType * state){
+void ALU(stateType state, stateType * newState) {
+        printf("\nALU");
+    int opcode = getOpcode(state.IDEX.instr);
+    printf("\nopcoe : %d", opcode);
 
-     int opcode = getOpcode((*state).IDEX.instr);
-      
     if (ADD == opcode)
     {
-        (*state).EXMEM.aluResult = (*state).IDEX.readRegA + (*state).IDEX.readRegB;
-
+        // (*newState).EXMEM.aluResult = (*newState).IDEX.readRegA + (*newState).IDEX.readRegB;
+        (*newState).EXMEM.aluResult = (*newState).IDEX.readRegA + (*newState).IDEX.readRegB;
+         printf("\nnand  Aalu %d ", (*newState).IDEX.readRegA );
+        printf("\nnand  balu %d ", (*newState).IDEX.readRegB );
+        printf("\nnand  result %d ",(*newState).EXMEM.aluResult );
     }
     else if (NAND == opcode)
     {
-         (*state).EXMEM.aluResult =~((*state).IDEX.readRegA & (*state).IDEX.readRegB);
+      //  int test = ~(*newState).IDEX.readRegA & (9); //(*newState).IDEX.readRegB;
+        (*newState).EXMEM.aluResult = ~((*newState).IDEX.readRegA & (*newState).IDEX.readRegB);
+        printf("\nnand  Aalu %d ", (*newState).IDEX.readRegA );
+        printf("\nnand  balu %d ", (*newState).IDEX.readRegB );
+        printf("\nnand  result %d ",(*newState).EXMEM.aluResult );
     }
     else if (LW == opcode || SW == opcode )
     {
-          (*state).EXMEM.aluResult =(*state).IDEX.offset + (*state).IDEX.readRegA;
-    }else{
+        (*newState).EXMEM.aluResult = (*newState).IDEX.offset + (*newState).IDEX.readRegA;
+        printf("\nlw regA %d", (*newState).IDEX.readRegA);
+        printf("\nlw offset alu %d", (*newState).IDEX.offset);
+        printf("\n--lw alu %d", (*newState).EXMEM.aluResult );
+
+    } else if(BEQ == opcode ) {
+
+        (*newState).EXMEM.aluResult = (*newState).IDEX.readRegA == (*newState).IDEX.readRegB;
+    } else {
+    }
+}
+
+void DataMemory(stateType state, stateType * newState) {
+
+    int opcode = getOpcode(state.EXMEM.instr);
+    EXMEMType input = state.EXMEM;
+    MEMWBType output;
+
+    output.instr = input.instr;
+
+    if (LW == opcode)
+    {
+        printf("\nloading lw");
+        (*newState).MEMWB.writeData = state.dataMem[state.EXMEM.aluResult];
+
+    } else if(SW == opcode) {
+
+        (*newState).dataMem[state.EXMEM.aluResult] = (*newState).EXMEM.readRegB;
+
+    } else if(ADD == opcode || NAND == opcode) {
+
+        (*newState).MEMWB.writeData = state.EXMEM.aluResult;
+    } else {
 
     }
 }
 
-void DataMemory(stateType * state){
+void WriteBack(stateType  state, stateType * newState ) {
+    printf("\n write back called");
+   // printState(&state);
+   // printf("\nsecond");
+   /// printState(newState);
 
-    int opcode = getOpcode((*state).EXMEM.instr);
-  
-    if (LW == opcode)
+    printf("\n ------------------------");
+    int code = opcode((* newState).WBEND.instr);
+    int code2 = opcode((* newState).WBEND.instr);
+    printf("\ncode %d", code);
+    printf("\ncode2 %d", code2);
+
+    int lwDes = field1((* newState).WBEND.instr);
+    printf("\nlwdes %d", lwDes);
+    int addDes = field2((* newState).WBEND.instr);
+
+    if (LW == code)
     {
-        (*state).MEMWB.writeData = (*state).dataMem[(*state).EXMEM.aluResult];
-
-    }else if(SW == opcode){
-
-        (*state).dataMem[(*state).EXMEM.aluResult] = (*state).EXMEM.readRegB;
-
-    }else{
-
-    }
-}
-
-void WriteBack(stateType * state){
-
-     int opcode = getOpcode((*state).WBEND.instr);
-
-    int extractOpcode = (*state).WBEND.instr - (NAND << 22);
-
-    getBytes(&extractOpcode, 19);
-
-    int lwDes = getBytes(&extractOpcode, 16);
-
-    int addDes = extractOpcode;
-
-
-    if (LW == opcode)
-    {
-        (*state).reg[lwDes] =  (*state).WBEND.writeData;
-    }else if(ADD == opcode){
+         printf("\n LW back called");
+        (*newState).reg[lwDes] =  (* newState).WBEND.writeData;
+    } else if(ADD == code) {
         //print
-       (*state).reg[addDes] =  (*state).EXMEM.aluResult;
+        (*newState).reg[addDes] =  (* newState).WBEND.writeData;
 
-    }else if(NAND == opcode){
+    } else if(NAND == code) {
+        (*newState).reg[addDes] =  (* newState).WBEND.writeData;
+    } else {
+
+    }
+ printf("\n write back ended");
+    //printState(&state);
+   // printf("\nsecond");
+   // printState(newState);
+    
+}
+
+void IFID(stateType  state, stateType * newState) {
+
+    (*newState).IFID.pcPlus1 = state.pc + 1;
+    (*newState).IFID.instr =  state.instrMem[ state.pc];
+
+    (*newState).pc=state.pc + 1;
 
 
-    }else{
+}
+
+void IDEX(stateType  state, stateType * newState) {
+
+    (*newState).IDEX.pcPlus1 = state.IFID.pcPlus1;
+    (*newState).IDEX.instr =   state.IFID.instr;
+
+    int regAOff, regBOff;
+
+    int offset = getRegisters( state.IDEX.instr,
+                               &  regAOff,&   regBOff );
+
+    printf("offset %d !!",offset);
+
+    //read register file and store it IDEX ref
+    (*newState).IDEX.readRegA =  state.reg[regAOff];
+    (*newState).IDEX.readRegB =  state.reg[regBOff];
+    (*newState).IDEX.offset = offset;
+
+    if(stallHazard(state, newState) == 1) {
+        printf("\nyes\n");
+        (*newState).IFID = state.IFID;
+        (*newState).pc = state.pc;
+        (*newState).IDEX.instr =NOOPINSTRUCTION;
+    } else {
+        printf("\nno\n");
+    }
+
+}
+
+void EXMEM(stateType  state, stateType * newState) {
+
+    printf("---offset %d, code %d !!",state.IDEX.offset,  getOpcode(state.IDEX.instr));
+
+    (*newState).EXMEM.instr =   state.IDEX.instr;
+
+    forwardHazard(state,newState);
+
+    (*newState).EXMEM.branchTarget =   state.IFID.pcPlus1 +  state.IDEX.offset;
+    (*newState).EXMEM.readRegB =  state.IDEX.readRegB;
+    printf("\n&&#regB %d",(*newState).IDEX.readRegB );
+    ALU(state,newState);
+}
+void MEMWB(stateType  state, stateType * newState) {
+
+    (*newState).MEMWB.instr =  state.EXMEM.instr;
+    DataMemory(state,newState);
+}
+void WBEND(stateType  state, stateType * newState) {
+
+    (*newState).WBEND.instr =  state.MEMWB.instr;
+    (*newState).WBEND.writeData =  state.MEMWB.writeData;
+    WriteBack(state, newState);
+}
+
+int stallHazard(stateType  state, stateType * newState) {
+    printf("\n stallHazard called");
+    int nRegA = field0( (*newState).IDEX.instr );
+    int nRegB = field1( (*newState).IDEX.instr );
+    int destReg = field1( state.IDEX.instr );
+    int code = opcode(state.IDEX.instr);
+
+    return(((nRegA == destReg) || (nRegB == destReg)) && (code == LW));
+}
+
+void forwardHazard(stateType  state, stateType * newState) {
+    printf("\nfwd called");
+    int nRegA = field0(state.IDEX.instr);
+    int nRegB = field1(state.IDEX.instr);
+
+    checkWBEND(state, newState, nRegA, nRegB);
+    checkMEMWB(state, newState, nRegA, nRegB);
+    checkEXMEM(state, newState, nRegA, nRegB);
+
+}
+
+void checkWBEND(stateType  state, stateType * newState, int nRegA, int nRegB) {
+    int code =opcode(state.WBEND.instr);
+    printf("\n checkWBEND called");
+
+    if(code == LW) {
+        int destReg = field1(state.WBEND.instr);
+        compareSet(nRegA, destReg,
+                   & (*newState).IDEX.readRegA, state.WBEND.writeData );
+
+        compareSet(nRegB, destReg,
+                   &(*newState).IDEX.readRegB, state.WBEND.writeData );
+
+        printf("\ncheck checkWBEND");
+
+    } else if(code == ADD || code == NAND) {
+        printf("\nforwarding for add or nand");
+        //getting the  destination regis
+        int destReg = field2(state.WBEND.instr);
+
+        compareSet(nRegA, destReg,
+                   &(*newState).IDEX.readRegA, state.WBEND.writeData );
+
+        compareSet(nRegB, destReg,
+                   &(*newState).IDEX.readRegB, state.WBEND.writeData );
+        printf("#regB %d",(*newState).IDEX.readRegB );
+    } else {
+
+    }
+
+}
+void checkMEMWB(stateType  state, stateType * newState,  int nRegA, int nRegB) {
+    printf("\n checkMEMWB called");
+
+    int code =opcode(state.MEMWB.instr);
+
+    if(code == LW) {
+        int destReg = field1(state.MEMWB.instr);
+       // printf("destReg")
+        compareSet(nRegA, destReg,
+                   & (*newState).IDEX.readRegA, state.MEMWB.writeData );
+
+        compareSet(nRegB, destReg,
+                   &(*newState).IDEX.readRegB, state.MEMWB.writeData );
+
+        printf("\ncheck EcheckMEMWBXMEM");
+
+    } else if(code == ADD || code == NAND) {
+        printf("\nforwarding for add or nand");
+        //getting the  destination regis
+        int destReg = field2(state.MEMWB.instr);
+
+        compareSet(nRegA, destReg,
+                   &(*newState).IDEX.readRegA, state.MEMWB.writeData );
+
+        compareSet(nRegB, destReg,
+                   &(*newState).IDEX.readRegB, state.MEMWB.writeData );
+printf("#regB %d",(*newState).IDEX.readRegB );
+    } else {
 
     }
 }
+void checkEXMEM(stateType  state, stateType * newState,  int nRegA, int nRegB ) {
+    int code = opcode(state.EXMEM.instr);
 
-void IFID(stateType * newState){
-    newState.IFID.pcPlus1++;
-    newState.IFID.instr = newState.instrMem[newState.pc];
+     printf("\n checkEXMEM called");
+
+    if(code == ADD || code == NAND) {
+        printf("\ncheck EXMEM");
+    printf("\nforwarding for add or nand");
+        //getting the  destination register
+        int destReg = field2(state.EXMEM.instr);
+
+        compareSet(nRegA, destReg,
+                   &(*newState).IDEX.readRegA, state.EXMEM.aluResult );
+
+        compareSet(nRegB, destReg,
+                   &(*newState).IDEX.readRegB, state.EXMEM.aluResult );
+printf("#regB %d",(*newState).IDEX.readRegB );
+    } else {
+
+    }
 }
-void IDEX(stateType * newState){
-
-}
-void EXMEM(stateType * state){
-
-}
-void MEMWB(stateType * state){
-
-}
-void WBEND(stateType * state){
-
-}
-
 
 //utilities
 void clearRegisters(stateType *statePtr)
@@ -309,24 +479,29 @@ int getOpcode(int instruction)
 {
     int opcode = 0;
     opcode = instruction >> 22;
-    
+
     return opcode;
 }
 
-int getRegisters(int instruction, int * regA, int * regB){
+void compareSet(int Lreg, int Rreg, int * sR,  int iR ) {
+
+    if(Lreg == Rreg) {
+        printf("\nforwarding  %d = %d", (*sR),iR);
+        (*sR) = iR;
+    }
+}
+
+
+int getRegisters(int instruction, int * regA, int * regB) {
 
     int opcode = getOpcode(instruction);
-    printf("\n --------------opcode :  ");
-    printf("%d --------------",opcode);
     int extractOpcode = instruction - (opcode << 22);
 
-    (*regA) = getBytes(&extractOpcode, 19);
-    
-    (*regB) = getBytes(&extractOpcode, 16);
-    
-    printf("\n-------------- rega %d, regb %d --------------", (*regA), (*regB));
+    (*regA) = field0(instruction);
 
-    int offsetField = convertNum(extractOpcode);
+    (*regB) = field1(instruction);
+
+    int offsetField = convertNum(field2(instruction));
 
     return offsetField;
 }
@@ -348,7 +523,7 @@ int convertNum(int num)
     return (num);
 }
 
-void setInitialState(stateType *state){
+void setInitialState(stateType *state) {
     (*state).IFID.instr = NOOPINSTRUCTION;
     (*state).IDEX.instr  = NOOPINSTRUCTION;
     (*state).EXMEM.instr  = NOOPINSTRUCTION;
@@ -357,84 +532,84 @@ void setInitialState(stateType *state){
 }
 
 //default method
-void printState(stateType *statePtr){
+void printState(stateType *statePtr) {
     int i;
     printf("\n@@@\nstate before cycle %d starts\n", statePtr->cycles);
     printf("\tpc %d\n", statePtr->pc);
 
     printf("\tdata memory:\n");
-	for (i=0; i<statePtr->numMemory; i++) {
-	    printf("\t\tdataMem[ %d ] %d\n", i, statePtr->dataMem[i]);
-	}
+    for (i=0; i<statePtr->numMemory; i++) {
+        printf("\t\tdataMem[ %d ] %d\n", i, statePtr->dataMem[i]);
+    }
     printf("\tregisters:\n");
-	for (i=0; i<NUMREGS; i++) {
-	    printf("\t\treg[ %d ] %d\n", i, statePtr->reg[i]);
-	}
+    for (i=0; i<NUMREGS; i++) {
+        printf("\t\treg[ %d ] %d\n", i, statePtr->reg[i]);
+    }
     printf("\tIFID:\n");
-	printf("\t\tinstruction ");
-	printInstruction(statePtr->IFID.instr);
-	printf("\t\tpcPlus1 %d\n", statePtr->IFID.pcPlus1);
+    printf("\t\tinstruction ");
+    printInstruction(statePtr->IFID.instr);
+    printf("\t\tpcPlus1 %d\n", statePtr->IFID.pcPlus1);
     printf("\tIDEX:\n");
-	printf("\t\tinstruction ");
-	printInstruction(statePtr->IDEX.instr);
-	printf("\t\tpcPlus1 %d\n", statePtr->IDEX.pcPlus1);
-	printf("\t\treadRegA %d\n", statePtr->IDEX.readRegA);
-	printf("\t\treadRegB %d\n", statePtr->IDEX.readRegB);
-	printf("\t\toffset %d\n", statePtr->IDEX.offset);
+    printf("\t\tinstruction ");
+    printInstruction(statePtr->IDEX.instr);
+    printf("\t\tpcPlus1 %d\n", statePtr->IDEX.pcPlus1);
+    printf("\t\treadRegA %d\n", statePtr->IDEX.readRegA);
+    printf("\t\treadRegB %d\n", statePtr->IDEX.readRegB);
+    printf("\t\toffset %d\n", statePtr->IDEX.offset);
     printf("\tEXMEM:\n");
-	printf("\t\tinstruction ");
-	printInstruction(statePtr->EXMEM.instr);
-	printf("\t\tbranchTarget %d\n", statePtr->EXMEM.branchTarget);
-	printf("\t\taluResult %d\n", statePtr->EXMEM.aluResult);
-	printf("\t\treadRegB %d\n", statePtr->EXMEM.readRegB);
+    printf("\t\tinstruction ");
+    printInstruction(statePtr->EXMEM.instr);
+    printf("\t\tbranchTarget %d\n", statePtr->EXMEM.branchTarget);
+    printf("\t\taluResult %d\n", statePtr->EXMEM.aluResult);
+    printf("\t\treadRegB %d\n", statePtr->EXMEM.readRegB);
     printf("\tMEMWB:\n");
-	printf("\t\tinstruction ");
-	printInstruction(statePtr->MEMWB.instr);
-	printf("\t\twriteData %d\n", statePtr->MEMWB.writeData);
+    printf("\t\tinstruction ");
+    printInstruction(statePtr->MEMWB.instr);
+    printf("\t\twriteData %d\n", statePtr->MEMWB.writeData);
     printf("\tWBEND:\n");
-	printf("\t\tinstruction ");
-	printInstruction(statePtr->WBEND.instr);
-	printf("\t\twriteData %d\n", statePtr->WBEND.writeData);
+    printf("\t\tinstruction ");
+    printInstruction(statePtr->WBEND.instr);
+    printf("\t\twriteData %d\n", statePtr->WBEND.writeData);
 }
 
-int field0(int instruction){
+int field0(int instruction) {
     return( (instruction>>19) & 0x7);
 }
 
-int field1(int instruction){
+int field1(int instruction) {
     return( (instruction>>16) & 0x7);
 }
 
-int field2(int instruction){
+int field2(int instruction) {
     return(instruction & 0xFFFF);
 }
 
-int opcode(int instruction){
+int opcode(int instruction) {
     return(instruction>>22);
 }
 
-void printInstruction(int instr){
+void printInstruction(int instr) {
     char opcodeString[10];
     if (opcode(instr) == ADD) {
-	strcpy(opcodeString, "add");
+        strcpy(opcodeString, "add");
     } else if (opcode(instr) == NAND) {
-	strcpy(opcodeString, "nand");
+        strcpy(opcodeString, "nand");
     } else if (opcode(instr) == LW) {
-	strcpy(opcodeString, "lw");
+        strcpy(opcodeString, "lw");
     } else if (opcode(instr) == SW) {
-	strcpy(opcodeString, "sw");
+        strcpy(opcodeString, "sw");
     } else if (opcode(instr) == BEQ) {
-	strcpy(opcodeString, "beq");
+        strcpy(opcodeString, "beq");
     } else if (opcode(instr) == JALR) {
-	strcpy(opcodeString, "jalr");
+        strcpy(opcodeString, "jalr");
     } else if (opcode(instr) == HALT) {
-	strcpy(opcodeString, "halt");
+        strcpy(opcodeString, "halt");
     } else if (opcode(instr) == NOOP) {
-	strcpy(opcodeString, "noop");
+        strcpy(opcodeString, "noop");
     } else {
-	strcpy(opcodeString, "data");
+        strcpy(opcodeString, "data");
     }
 
     printf("%s %d %d %d\n", opcodeString, field0(instr), field1(instr),
-	field2(instr));
+           field2(instr));
 }

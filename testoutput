@@ -1,14 +1,523 @@
-memory[0]=1638402
-memory[1]=25165824
+memory[0]=8454148
+memory[1]=589824
+memory[2]=65538
+memory[3]=25165824
+memory[4]=12345
 		instruction memory:
-			memory[2]=0
-			memory[2]=0
+			instrMem[0]lw 0 1 4
+			instrMem[1]add 1 1 0
+			instrMem[2]add 0 1 2
+			instrMem[3]halt 0 0 0
+			instrMem[4]add 0 0 12345
 
-opcode : 32724
- --------------opcode :  0 --------------
--------------- rega 3, regb 1 --------------
-opcode : 1638402
- --------------opcode :  6 --------------
--------------- rega 0, regb 0 --------------
-opcode : 25165824machine halted
-total of 2 cycles executed
+@@@
+state before cycle 0 starts
+	pc 0
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 0
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction noop 0 0 0
+		pcPlus1 0
+	IDEX:
+		instruction noop 0 0 0
+		pcPlus1 0
+		readRegA -726971928
+		readRegB 32730
+		offset -2068446044
+	EXMEM:
+		instruction noop 0 0 0
+		branchTarget -727242264
+		aluResult 32730
+		readRegB -726971928
+	MEMWB:
+		instruction noop 0 0 0
+		writeData -726969096
+	WBEND:
+		instruction noop 0 0 0
+		writeData 0
+offset 0 !!
+ stallHazard called
+no
+---offset -2068446044, code 7 !!
+fwd called
+ checkWBEND called
+ checkMEMWB called
+ checkEXMEM called
+&&#regB 0
+ALU
+opcoe : 7
+ write back called
+ ------------------------
+code 7
+code2 7
+lwdes 0
+ write back ended
+@@@
+state before cycle 1 starts
+	pc 1
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 0
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction lw 0 1 4
+		pcPlus1 1
+	IDEX:
+		instruction noop 0 0 0
+		pcPlus1 0
+		readRegA 0
+		readRegB 0
+		offset 0
+	EXMEM:
+		instruction noop 0 0 0
+		branchTarget -2068446044
+		aluResult 32730
+		readRegB 32730
+	MEMWB:
+		instruction noop 0 0 0
+		writeData -726969096
+	WBEND:
+		instruction noop 0 0 0
+		writeData -726969096
+offset 0 !!
+ stallHazard called
+no
+---offset 0, code 7 !!
+fwd called
+ checkWBEND called
+ checkMEMWB called
+ checkEXMEM called
+&&#regB 0
+ALU
+opcoe : 7
+ write back called
+ ------------------------
+code 7
+code2 7
+lwdes 0
+ write back ended
+@@@
+state before cycle 2 starts
+	pc 2
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 0
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction add 1 1 0
+		pcPlus1 2
+	IDEX:
+		instruction lw 0 1 4
+		pcPlus1 1
+		readRegA 0
+		readRegB 0
+		offset 0
+	EXMEM:
+		instruction noop 0 0 0
+		branchTarget 1
+		aluResult 32730
+		readRegB 0
+	MEMWB:
+		instruction noop 0 0 0
+		writeData -726969096
+	WBEND:
+		instruction noop 0 0 0
+		writeData -726969096
+offset 4 !!
+ stallHazard called
+yes
+---offset 0, code 2 !!
+fwd called
+ checkWBEND called
+ checkMEMWB called
+ checkEXMEM called
+&&#regB 0
+ALU
+opcoe : 2
+lw regA 0
+lw offset alu 4
+--lw alu 4
+ write back called
+ ------------------------
+code 7
+code2 7
+lwdes 0
+ write back ended
+@@@
+state before cycle 3 starts
+	pc 2
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 0
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction add 1 1 0
+		pcPlus1 2
+	IDEX:
+		instruction noop 0 0 0
+		pcPlus1 2
+		readRegA 0
+		readRegB 0
+		offset 4
+	EXMEM:
+		instruction lw 0 1 4
+		branchTarget 2
+		aluResult 4
+		readRegB 0
+	MEMWB:
+		instruction noop 0 0 0
+		writeData -726969096
+	WBEND:
+		instruction noop 0 0 0
+		writeData -726969096
+offset 0 !!
+ stallHazard called
+no
+---offset 4, code 7 !!
+fwd called
+ checkWBEND called
+ checkMEMWB called
+ checkEXMEM called
+&&#regB 0
+ALU
+opcoe : 7
+loading lw
+ write back called
+ ------------------------
+code 7
+code2 7
+lwdes 0
+ write back ended
+@@@
+state before cycle 4 starts
+	pc 3
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 0
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction add 0 1 2
+		pcPlus1 3
+	IDEX:
+		instruction add 1 1 0
+		pcPlus1 2
+		readRegA 0
+		readRegB 0
+		offset 0
+	EXMEM:
+		instruction noop 0 0 0
+		branchTarget 6
+		aluResult 4
+		readRegB 0
+	MEMWB:
+		instruction lw 0 1 4
+		writeData 12345
+	WBEND:
+		instruction noop 0 0 0
+		writeData -726969096
+offset 0 !!
+ stallHazard called
+no
+---offset 0, code 0 !!
+fwd called
+ checkWBEND called
+ checkMEMWB called
+forwarding  0 = 12345
+forwarding  0 = 12345
+check EcheckMEMWBXMEM
+ checkEXMEM called
+&&#regB 12345
+ALU
+opcoe : 0
+nand  Aalu 12345 
+nand  balu 12345 
+nand  result 24690 
+ write back called
+ ------------------------
+code 2
+code2 2
+lwdes 1
+ LW back called
+ write back ended
+@@@
+state before cycle 5 starts
+	pc 4
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 12345
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction halt 0 0 0
+		pcPlus1 4
+	IDEX:
+		instruction add 0 1 2
+		pcPlus1 3
+		readRegA 12345
+		readRegB 12345
+		offset 0
+	EXMEM:
+		instruction add 1 1 0
+		branchTarget 3
+		aluResult 24690
+		readRegB 0
+	MEMWB:
+		instruction noop 0 0 0
+		writeData 12345
+	WBEND:
+		instruction lw 0 1 4
+		writeData 12345
+offset 2 !!
+ stallHazard called
+no
+---offset 0, code 0 !!
+fwd called
+ checkWBEND called
+forwarding  12345 = 12345
+check checkWBEND
+ checkMEMWB called
+ checkEXMEM called
+check EXMEM
+forwarding for add or nand
+forwarding  0 = 24690#regB 12345
+&&#regB 12345
+ALU
+opcoe : 0
+nand  Aalu 24690 
+nand  balu 12345 
+nand  result 37035 
+ write back called
+ ------------------------
+code 7
+code2 7
+lwdes 0
+ write back ended
+@@@
+state before cycle 6 starts
+	pc 5
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 12345
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction add 0 0 12345
+		pcPlus1 5
+	IDEX:
+		instruction halt 0 0 0
+		pcPlus1 4
+		readRegA 24690
+		readRegB 12345
+		offset 2
+	EXMEM:
+		instruction add 0 1 2
+		branchTarget 4
+		aluResult 37035
+		readRegB 12345
+	MEMWB:
+		instruction add 1 1 0
+		writeData 24690
+	WBEND:
+		instruction noop 0 0 0
+		writeData 12345
+offset 0 !!
+ stallHazard called
+no
+---offset 2, code 6 !!
+fwd called
+ checkWBEND called
+ checkMEMWB called
+forwarding for add or nand
+forwarding  0 = 24690
+forwarding  0 = 24690#regB 24690
+ checkEXMEM called
+check EXMEM
+forwarding for add or nand#regB 24690
+&&#regB 24690
+ALU
+opcoe : 6
+ write back called
+ ------------------------
+code 0
+code2 0
+lwdes 1
+ write back ended
+@@@
+state before cycle 7 starts
+	pc 6
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 24690
+		reg[ 1 ] 12345
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction add 0 0 0
+		pcPlus1 6
+	IDEX:
+		instruction add 0 0 12345
+		pcPlus1 5
+		readRegA 24690
+		readRegB 24690
+		offset 0
+	EXMEM:
+		instruction halt 0 0 0
+		branchTarget 7
+		aluResult 37035
+		readRegB 12345
+	MEMWB:
+		instruction add 0 1 2
+		writeData 37035
+	WBEND:
+		instruction add 1 1 0
+		writeData 24690
+offset 12345 !!
+ stallHazard called
+no
+---offset 0, code 0 !!
+fwd called
+ checkWBEND called
+forwarding for add or nand
+forwarding  24690 = 24690
+forwarding  24690 = 24690#regB 24690
+ checkMEMWB called
+forwarding for add or nand#regB 24690
+ checkEXMEM called
+&&#regB 24690
+ALU
+opcoe : 0
+nand  Aalu 24690 
+nand  balu 24690 
+nand  result 49380 
+ write back called
+ ------------------------
+code 0
+code2 0
+lwdes 1
+ write back ended
+@@@
+state before cycle 8 starts
+	pc 7
+	data memory:
+		dataMem[ 0 ] 8454148
+		dataMem[ 1 ] 589824
+		dataMem[ 2 ] 65538
+		dataMem[ 3 ] 25165824
+		dataMem[ 4 ] 12345
+	registers:
+		reg[ 0 ] 24690
+		reg[ 1 ] 12345
+		reg[ 2 ] 37035
+		reg[ 3 ] 0
+		reg[ 4 ] 0
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction add 0 0 0
+		pcPlus1 7
+	IDEX:
+		instruction add 0 0 0
+		pcPlus1 6
+		readRegA 24690
+		readRegB 24690
+		offset 12345
+	EXMEM:
+		instruction add 0 0 12345
+		branchTarget 6
+		aluResult 49380
+		readRegB 24690
+	MEMWB:
+		instruction halt 0 0 0
+		writeData 37035
+	WBEND:
+		instruction add 0 1 2
+		writeData 37035
+machine halted
+total of 8 cycles executed
