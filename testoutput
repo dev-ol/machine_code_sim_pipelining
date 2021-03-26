@@ -49,43 +49,22 @@ state before cycle 0 starts
 	IDEX:
 		instruction noop 0 0 0
 		pcPlus1 0
-		readRegA 76233192
-		readRegB 32555
-		offset 656974788
+		readRegA -192861720
+		readRegB 32637
+		offset -307699068
 	EXMEM:
 		instruction noop 0 0 0
-		branchTarget 75962856
-		aluResult 32555
-		readRegB 76233192
+		branchTarget -193132056
+		aluResult 32637
+		readRegB -192861720
 	MEMWB:
 		instruction noop 0 0 0
-		writeData 76236024
+		writeData -192858888
 	WBEND:
 		instruction noop 0 0 0
 		writeData 0
-offset 0 !!
- stallHazard called
-no
-offset 0 !!---offset 656974788, code 7 !!
-fwd called
- checkWBEND called
- checkMEMWB called
- checkEXMEM callednoop 0 0 0
+noop 0 0 0
 
- branch 656974788
- branch 2 75962856
- pcplus1 0
- offset 656974788
-&&#regB 0
-ALU
-opcoe : 7
- specSquash called
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 1 starts
 	pc 1
@@ -120,38 +99,17 @@ state before cycle 1 starts
 		offset 0
 	EXMEM:
 		instruction noop 0 0 0
-		branchTarget 656974788
-		aluResult 32555
-		readRegB 32555
+		branchTarget -307699068
+		aluResult 32637
+		readRegB 32637
 	MEMWB:
 		instruction noop 0 0 0
-		writeData 76236024
+		writeData -192858888
 	WBEND:
 		instruction noop 0 0 0
-		writeData 76236024
-offset 0 !!
- stallHazard called
-no
-offset 0 !!---offset 0, code 7 !!
-fwd called
- checkWBEND called
- checkMEMWB called
- checkEXMEM callednoop 0 0 0
+		writeData -192858888
+noop 0 0 0
 
- branch 0
- branch 2 656974788
- pcplus1 0
- offset 0
-&&#regB 0
-ALU
-opcoe : 7
- specSquash called
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 2 starts
 	pc 2
@@ -187,40 +145,16 @@ state before cycle 2 starts
 	EXMEM:
 		instruction noop 0 0 0
 		branchTarget 0
-		aluResult 32555
+		aluResult 32637
 		readRegB 0
 	MEMWB:
 		instruction noop 0 0 0
-		writeData 76236024
+		writeData -192858888
 	WBEND:
 		instruction noop 0 0 0
-		writeData 76236024
-offset 7 !!
- stallHazard called
-no
-offset 7 !!---offset 0, code 2 !!
-fwd called
- checkWBEND called
- checkMEMWB called
- checkEXMEM calledlw 0 1 7
+		writeData -192858888
+lw 0 1 7
 
- branch 1
- branch 2 0
- pcplus1 1
- offset 0
-&&#regB 0
-ALU
-opcoe : 2
-lw regA 0
-lw offset alu 7
---lw alu 7
- specSquash called
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 3 starts
 	pc 3
@@ -260,37 +194,12 @@ state before cycle 3 starts
 		readRegB 0
 	MEMWB:
 		instruction noop 0 0 0
-		writeData 76236024
+		writeData -192858888
 	WBEND:
 		instruction noop 0 0 0
-		writeData 76236024
-offset 8 !!
- stallHazard called
-no
-offset 8 !!---offset 7, code 2 !!
-fwd called
- checkWBEND called
- checkMEMWB called
- checkEXMEM calledlw 0 2 8
+		writeData -192858888
+lw 0 2 8
 
- branch 9
- branch 2 1
- pcplus1 2
- offset 7
-&&#regB 0
-ALU
-opcoe : 2
-lw regA 0
-lw offset alu 8
---lw alu 8
- specSquash called
-loading lw
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 4 starts
 	pc 4
@@ -333,36 +242,9 @@ state before cycle 4 starts
 		writeData 10
 	WBEND:
 		instruction noop 0 0 0
-		writeData 76236024
-offset 9 !!
- stallHazard called
-yes
-offset 9 !!---offset 8, code 2 !!
-fwd called
- checkWBEND called
- checkMEMWB called
-check EcheckMEMWBXMEM
- checkEXMEM calledlw 0 6 9
+		writeData -192858888
+lw 0 6 9
 
- branch 11
- branch 2 9
- pcplus1 3
- offset 8
-&&#regB 0
-ALU
-opcoe : 2
-lw regA 0
-lw offset alu 9
---lw alu 9
- specSquash called
-loading lw
- write back called
- ------------------------
-code 2
-code2 2
-lwdes 1
- LW back called
- write back ended
 @@@
 state before cycle 5 starts
 	pc 4
@@ -406,33 +288,8 @@ state before cycle 5 starts
 	WBEND:
 		instruction lw 0 1 7
 		writeData 10
-offset 0 !!
- stallHazard called
-no
-offset 0 !!---offset 9, code 7 !!
-fwd called
- checkWBEND called
-check checkWBEND
- checkMEMWB called
-check EcheckMEMWBXMEM
- checkEXMEM callednoop 0 0 0
+noop 0 0 0
 
- branch 13
- branch 2 11
- pcplus1 4
- offset 9
-&&#regB 0
-ALU
-opcoe : 7
- specSquash called
-loading lw
- write back called
- ------------------------
-code 2
-code2 2
-lwdes 2
- LW back called
- write back ended
 @@@
 state before cycle 6 starts
 	pc 5
@@ -476,37 +333,8 @@ state before cycle 6 starts
 	WBEND:
 		instruction lw 0 2 8
 		writeData 8
-offset 2 !!
- stallHazard called
-no
-offset 2 !!---offset 0, code 0 !!
-fwd called
- checkWBEND called
-forwarding  8 = 8
-check checkWBEND
- checkMEMWB called
-forwarding  0 = 2
-check EcheckMEMWBXMEM
- checkEXMEM calledadd 2 6 2
+add 2 6 2
 
- branch 4
- branch 2 13
- pcplus1 4
- offset 0
-&&#regB 2
-ALU
-opcoe : 0
-nand  Aalu 8 
-nand  balu 2 
-nand  result 10 
- specSquash called
- write back called
- ------------------------
-code 2
-code2 2
-lwdes 6
- LW back called
- write back ended
 @@@
 state before cycle 7 starts
 	pc 6
@@ -550,36 +378,8 @@ state before cycle 7 starts
 	WBEND:
 		instruction lw 0 6 9
 		writeData 2
-offset -2 !!
- stallHazard called
-no
-offset -2 !!---offset 2, code 4 !!
-fwd called
- checkWBEND called
-check checkWBEND
- checkMEMWB called
- checkEXMEM called
-check EXMEM
-forwarding for add or nand
-forwarding  8 = 10#regB 10beq 1 2 65534
+beq 1 2 65534
 
- branch 7
- branch 2 4
- pcplus1 5
- offset 2
-&&#regB 10
-ALU
-opcoe : 4
-BEQ Aalu 10 
-BEQ balu 10 
-BEQ  result 1 
- specSquash called
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 8 starts
 	pc 7
@@ -623,35 +423,8 @@ state before cycle 8 starts
 	WBEND:
 		instruction noop 0 0 0
 		writeData 2
-offset 5 !!
- stallHazard called
-no
-offset 5 !!---offset -2, code 1 !!
-fwd called
- checkWBEND called
- checkMEMWB called
-forwarding for add or nand#regB 10
- checkEXMEM callednand 3 1 5
+nand 3 1 5
 
- branch 4
- branch 2 7
- pcplus1 6
- offset -2
-&&#regB 10
-ALU
-opcoe : 1
-nand  Aalu 0 
-nand  balu 10 
-nand  result -1 
- specSquash called
- specSquash if called i
- branch target 4
- write back called
- ------------------------
-code 0
-code2 0
-lwdes 6
- write back ended
 @@@
 state before cycle 9 starts
 	pc 3
@@ -695,30 +468,8 @@ state before cycle 9 starts
 	WBEND:
 		instruction add 2 6 2
 		writeData 10
-offset 0 !!
- stallHazard called
-no
-offset 0 !!---offset 5, code 7 !!
-fwd called
- checkWBEND called
-forwarding for add or nand#regB 0
- checkMEMWB called
- checkEXMEM callednoop 0 0 0
+noop 0 0 0
 
- branch 12
- branch 2 4
- pcplus1 7
- offset 5
-&&#regB 0
-ALU
-opcoe : 7
- specSquash called
- write back called
- ------------------------
-code 4
-code2 4
-lwdes 2
- write back ended
 @@@
 state before cycle 10 starts
 	pc 4
@@ -762,29 +513,8 @@ state before cycle 10 starts
 	WBEND:
 		instruction beq 1 2 65534
 		writeData 10
-offset 0 !!
- stallHazard called
-no
-offset 0 !!---offset 0, code 7 !!
-fwd called
- checkWBEND called
- checkMEMWB called
- checkEXMEM callednoop 0 0 0
+noop 0 0 0
 
- branch 8
- branch 2 12
- pcplus1 8
- offset 0
-&&#regB 0
-ALU
-opcoe : 7
- specSquash called
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 11 starts
 	pc 5
@@ -828,32 +558,8 @@ state before cycle 11 starts
 	WBEND:
 		instruction noop 0 0 0
 		writeData 10
-offset 2 !!
- stallHazard called
-no
-offset 2 !!---offset 0, code 0 !!
-fwd called
- checkWBEND called
- checkMEMWB called
- checkEXMEM calledadd 2 6 2
+add 2 6 2
 
- branch 4
- branch 2 8
- pcplus1 4
- offset 0
-&&#regB 2
-ALU
-opcoe : 0
-nand  Aalu 10 
-nand  balu 2 
-nand  result 12 
- specSquash called
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 12 starts
 	pc 6
@@ -897,35 +603,8 @@ state before cycle 12 starts
 	WBEND:
 		instruction noop 0 0 0
 		writeData 10
-offset -2 !!
- stallHazard called
-no
-offset -2 !!---offset 2, code 4 !!
-fwd called
- checkWBEND called
- checkMEMWB called
- checkEXMEM called
-check EXMEM
-forwarding for add or nand
-forwarding  10 = 12#regB 12beq 1 2 65534
+beq 1 2 65534
 
- branch 7
- branch 2 4
- pcplus1 5
- offset 2
-&&#regB 12
-ALU
-opcoe : 4
-BEQ Aalu 10 
-BEQ balu 12 
-BEQ  result 0 
- specSquash called
- write back called
- ------------------------
-code 7
-code2 7
-lwdes 0
- write back ended
 @@@
 state before cycle 13 starts
 	pc 7
@@ -969,33 +648,8 @@ state before cycle 13 starts
 	WBEND:
 		instruction noop 0 0 0
 		writeData 10
-offset 5 !!
- stallHazard called
-no
-offset 5 !!---offset -2, code 1 !!
-fwd called
- checkWBEND called
- checkMEMWB called
-forwarding for add or nand#regB 10
- checkEXMEM callednand 3 1 5
+nand 3 1 5
 
- branch 4
- branch 2 7
- pcplus1 6
- offset -2
-&&#regB 10
-ALU
-opcoe : 1
-nand  Aalu 0 
-nand  balu 10 
-nand  result -1 
- specSquash called
- write back called
- ------------------------
-code 0
-code2 0
-lwdes 6
- write back ended
 @@@
 state before cycle 14 starts
 	pc 8
@@ -1039,32 +693,8 @@ state before cycle 14 starts
 	WBEND:
 		instruction add 2 6 2
 		writeData 12
-offset 0 !!
- stallHazard called
-no
-offset 0 !!---offset 5, code 6 !!
-fwd called
- checkWBEND called
-forwarding for add or nand#regB 0
- checkMEMWB called
- checkEXMEM called
-check EXMEM
-forwarding for add or nand#regB 0halt 0 0 0
+halt 0 0 0
 
- branch 12
- branch 2 4
- pcplus1 7
- offset 5
-&&#regB 0
-ALU
-opcoe : 6
- specSquash called
- write back called
- ------------------------
-code 4
-code2 4
-lwdes 2
- write back ended
 @@@
 state before cycle 15 starts
 	pc 9
@@ -1108,33 +738,8 @@ state before cycle 15 starts
 	WBEND:
 		instruction beq 1 2 65534
 		writeData 12
-offset 10 !!
- stallHazard called
-no
-offset 10 !!---offset 0, code 0 !!
-fwd called
- checkWBEND called
- checkMEMWB called
-forwarding for add or nand#regB 0
- checkEXMEM calledadd 0 0 10
+add 0 0 10
 
- branch 8
- branch 2 12
- pcplus1 8
- offset 0
-&&#regB 0
-ALU
-opcoe : 0
-nand  Aalu 0 
-nand  balu 0 
-nand  result 0 
- specSquash called
- write back called
- ------------------------
-code 1
-code2 1
-lwdes 1
- write back ended
 @@@
 state before cycle 16 starts
 	pc 10
