@@ -285,7 +285,6 @@ void IDEX(stateType  state, stateType * newState) {
     (*newState).IDEX.offset = offset;
 
     if(stallHazard(state, newState) == 1) {
-
         (*newState).IFID = state.IFID;
         (*newState).pc = state.pc;
         (*newState).IDEX.instr = NOOPINSTRUCTION;
@@ -401,6 +400,7 @@ void checkMEMWB(stateType  state, stateType * newState,  int nRegA, int nRegB) {
     int code =opcode(state.MEMWB.instr);
 
     if(code == LW) {
+
         int destReg = field1(state.MEMWB.instr);
 
          //compare regA with the destReg and then store 

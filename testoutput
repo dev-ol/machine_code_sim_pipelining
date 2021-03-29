@@ -1,36 +1,24 @@
-memory[0]=8454151
-memory[1]=8519688
-memory[2]=655361
-memory[3]=16842753
-memory[4]=16842749
-memory[5]=29360128
-memory[6]=25165824
-memory[7]=5
-memory[8]=-1
+memory[0]=655363
+memory[1]=5439492
+memory[2]=14417921
+memory[3]=2424838
+memory[4]=25165824
 		instruction memory:
-			instrMem[0]lw 0 1 7
-			instrMem[1]lw 0 2 8
-			instrMem[2]add 1 2 1
-			instrMem[3]beq 0 1 1
-			instrMem[4]beq 0 0 65533
-			instrMem[5]noop 0 0 0
-			instrMem[6]halt 0 0 0
-			instrMem[7]add 0 0 5
-			instrMem[8]data 7 7 65535
+			instrMem[0]add 1 2 3
+			instrMem[1]nand 2 3 4
+			instrMem[2]sw 3 4 1
+			instrMem[3]add 4 5 6
+			instrMem[4]halt 0 0 0
 
 @@@
 state before cycle 0 starts
 	pc 0
 	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] 5439492
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
 	registers:
 		reg[ 0 ] 0
 		reg[ 1 ] 0
@@ -46,17 +34,17 @@ state before cycle 0 starts
 	IDEX:
 		instruction noop 0 0 0
 		pcPlus1 0
-		readRegA -1610094104
-		readRegB 32696
-		offset -1648430892
+		readRegA 1463233000
+		readRegB 32637
+		offset 1296446324
 	EXMEM:
 		instruction noop 0 0 0
-		branchTarget -1610364440
-		aluResult 32696
-		readRegB -1610094104
+		branchTarget 1462962664
+		aluResult 32637
+		readRegB 1463233000
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -1610091272
+		writeData 1463235832
 	WBEND:
 		instruction noop 0 0 0
 		writeData 0
@@ -66,15 +54,11 @@ noop 0 0 0
 state before cycle 1 starts
 	pc 1
 	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] 5439492
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
 	registers:
 		reg[ 0 ] 0
 		reg[ 1 ] 0
@@ -85,7 +69,7 @@ state before cycle 1 starts
 		reg[ 6 ] 0
 		reg[ 7 ] 0
 	IFID:
-		instruction lw 0 1 7
+		instruction add 1 2 3
 		pcPlus1 1
 	IDEX:
 		instruction noop 0 0 0
@@ -95,30 +79,26 @@ state before cycle 1 starts
 		offset 0
 	EXMEM:
 		instruction noop 0 0 0
-		branchTarget -1648430892
-		aluResult 32696
-		readRegB 32696
+		branchTarget 1296446324
+		aluResult 32637
+		readRegB 32637
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -1610091272
+		writeData 1463235832
 	WBEND:
 		instruction noop 0 0 0
-		writeData -1610091272
+		writeData 1463235832
 noop 0 0 0
 
 @@@
 state before cycle 2 starts
 	pc 2
 	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] 5439492
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
 	registers:
 		reg[ 0 ] 0
 		reg[ 1 ] 0
@@ -129,10 +109,10 @@ state before cycle 2 starts
 		reg[ 6 ] 0
 		reg[ 7 ] 0
 	IFID:
-		instruction lw 0 2 8
+		instruction nand 2 3 4
 		pcPlus1 2
 	IDEX:
-		instruction lw 0 1 7
+		instruction add 1 2 3
 		pcPlus1 1
 		readRegA 0
 		readRegB 0
@@ -140,29 +120,25 @@ state before cycle 2 starts
 	EXMEM:
 		instruction noop 0 0 0
 		branchTarget 0
-		aluResult 32696
+		aluResult 32637
 		readRegB 0
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -1610091272
+		writeData 1463235832
 	WBEND:
 		instruction noop 0 0 0
-		writeData -1610091272
-lw 0 1 7
+		writeData 1463235832
+add 1 2 3
 
 @@@
 state before cycle 3 starts
 	pc 3
 	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] 5439492
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
 	registers:
 		reg[ 0 ] 0
 		reg[ 1 ] 0
@@ -173,40 +149,38 @@ state before cycle 3 starts
 		reg[ 6 ] 0
 		reg[ 7 ] 0
 	IFID:
-		instruction add 1 2 1
+		instruction sw 3 4 1
 		pcPlus1 3
 	IDEX:
-		instruction lw 0 2 8
+		instruction nand 2 3 4
 		pcPlus1 2
 		readRegA 0
 		readRegB 0
-		offset 7
+		offset 3
 	EXMEM:
-		instruction lw 0 1 7
+		instruction add 1 2 3
 		branchTarget 1
-		aluResult 7
+		aluResult 0
 		readRegB 0
 	MEMWB:
 		instruction noop 0 0 0
-		writeData -1610091272
+		writeData 1463235832
 	WBEND:
 		instruction noop 0 0 0
-		writeData -1610091272
-lw 0 2 8
+		writeData 1463235832
+
+hazards
+nand 2 3 4
 
 @@@
 state before cycle 4 starts
-	pc 3
+	pc 4
 	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] 5439492
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
 	registers:
 		reg[ 0 ] 0
 		reg[ 1 ] 0
@@ -217,43 +191,43 @@ state before cycle 4 starts
 		reg[ 6 ] 0
 		reg[ 7 ] 0
 	IFID:
-		instruction add 1 2 1
-		pcPlus1 3
+		instruction add 4 5 6
+		pcPlus1 4
 	IDEX:
-		instruction noop 0 0 0
+		instruction sw 3 4 1
 		pcPlus1 3
 		readRegA 0
 		readRegB 0
-		offset 8
+		offset 4
 	EXMEM:
-		instruction lw 0 2 8
-		branchTarget 9
-		aluResult 8
+		instruction nand 2 3 4
+		branchTarget 5
+		aluResult -1
 		readRegB 0
 	MEMWB:
-		instruction lw 0 1 7
-		writeData 5
+		instruction add 1 2 3
+		writeData 0
 	WBEND:
 		instruction noop 0 0 0
-		writeData -1610091272
-noop 0 0 0
+		writeData 1463235832
+
+hazards
+
+hazards
+sw 3 4 1
 
 @@@
 state before cycle 5 starts
-	pc 4
+	pc 5
 	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] 5439492
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
 	registers:
 		reg[ 0 ] 0
-		reg[ 1 ] 5
+		reg[ 1 ] 0
 		reg[ 2 ] 0
 		reg[ 3 ] 0
 		reg[ 4 ] 0
@@ -261,1432 +235,146 @@ state before cycle 5 starts
 		reg[ 6 ] 0
 		reg[ 7 ] 0
 	IFID:
-		instruction beq 0 1 1
-		pcPlus1 4
+		instruction halt 0 0 0
+		pcPlus1 5
 	IDEX:
-		instruction add 1 2 1
-		pcPlus1 3
+		instruction add 4 5 6
+		pcPlus1 4
 		readRegA 0
-		readRegB 0
-		offset 0
+		readRegB -1
+		offset 1
 	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 11
-		aluResult 8
+		instruction sw 3 4 1
+		branchTarget 7
+		aluResult 1
 		readRegB 0
 	MEMWB:
-		instruction lw 0 2 8
+		instruction nand 2 3 4
 		writeData -1
 	WBEND:
-		instruction lw 0 1 7
-		writeData 5
-add 1 2 1
+		instruction add 1 2 3
+		writeData 0
+
+hazards
+add 4 5 6
 
 @@@
 state before cycle 6 starts
-	pc 5
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 5
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 0 65533
-		pcPlus1 5
-	IDEX:
-		instruction beq 0 1 1
-		pcPlus1 4
-		readRegA 5
-		readRegB -1
-		offset 1
-	EXMEM:
-		instruction add 1 2 1
-		branchTarget 3
-		aluResult 4
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData -1
-	WBEND:
-		instruction lw 0 2 8
-		writeData -1
-beq 0 1 1
-
-@@@
-state before cycle 7 starts
 	pc 6
 	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 5
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 6
-	IDEX:
-		instruction beq 0 0 65533
-		pcPlus1 5
-		readRegA 0
-		readRegB 4
-		offset 1
-	EXMEM:
-		instruction beq 0 1 1
-		branchTarget 5
-		aluResult 0
-		readRegB -1
-	MEMWB:
-		instruction add 1 2 1
-		writeData 4
-	WBEND:
-		instruction noop 0 0 0
-		writeData -1
-beq 0 0 65533
-
-@@@
-state before cycle 8 starts
-	pc 7
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 4
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction halt 0 0 0
-		pcPlus1 7
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 6
-		readRegA 0
-		readRegB 0
-		offset -3
-	EXMEM:
-		instruction beq 0 0 65533
-		branchTarget 6
-		aluResult 1
-		readRegB 4
-	MEMWB:
-		instruction beq 0 1 1
-		writeData 4
-	WBEND:
-		instruction add 1 2 1
-		writeData 4
-noop 0 0 0
-
-@@@
-state before cycle 9 starts
-	pc 2
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 4
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 8
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 7
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 3
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction beq 0 0 65533
-		writeData 4
-	WBEND:
-		instruction beq 0 1 1
-		writeData 4
-noop 0 0 0
-
-@@@
-state before cycle 10 starts
-	pc 3
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 4
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction add 1 2 1
-		pcPlus1 3
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 8
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 7
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 4
-	WBEND:
-		instruction beq 0 0 65533
-		writeData 4
-noop 0 0 0
-
-@@@
-state before cycle 11 starts
-	pc 4
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 4
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 1 1
-		pcPlus1 4
-	IDEX:
-		instruction add 1 2 1
-		pcPlus1 3
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 8
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 4
-	WBEND:
-		instruction noop 0 0 0
-		writeData 4
-add 1 2 1
-
-@@@
-state before cycle 12 starts
-	pc 5
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 4
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 0 65533
-		pcPlus1 5
-	IDEX:
-		instruction beq 0 1 1
-		pcPlus1 4
-		readRegA 4
-		readRegB -1
-		offset 1
-	EXMEM:
-		instruction add 1 2 1
-		branchTarget 3
-		aluResult 3
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 4
-	WBEND:
-		instruction noop 0 0 0
-		writeData 4
-beq 0 1 1
-
-@@@
-state before cycle 13 starts
-	pc 6
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 4
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 6
-	IDEX:
-		instruction beq 0 0 65533
-		pcPlus1 5
-		readRegA 0
-		readRegB 3
-		offset 1
-	EXMEM:
-		instruction beq 0 1 1
-		branchTarget 5
-		aluResult 0
-		readRegB -1
-	MEMWB:
-		instruction add 1 2 1
-		writeData 3
-	WBEND:
-		instruction noop 0 0 0
-		writeData 4
-beq 0 0 65533
-
-@@@
-state before cycle 14 starts
-	pc 7
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 3
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction halt 0 0 0
-		pcPlus1 7
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 6
-		readRegA 0
-		readRegB 0
-		offset -3
-	EXMEM:
-		instruction beq 0 0 65533
-		branchTarget 6
-		aluResult 1
-		readRegB 3
-	MEMWB:
-		instruction beq 0 1 1
-		writeData 3
-	WBEND:
-		instruction add 1 2 1
-		writeData 3
-noop 0 0 0
-
-@@@
-state before cycle 15 starts
-	pc 2
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 3
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 8
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 7
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 3
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction beq 0 0 65533
-		writeData 3
-	WBEND:
-		instruction beq 0 1 1
-		writeData 3
-noop 0 0 0
-
-@@@
-state before cycle 16 starts
-	pc 3
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 3
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction add 1 2 1
-		pcPlus1 3
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 8
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 7
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 3
-	WBEND:
-		instruction beq 0 0 65533
-		writeData 3
-noop 0 0 0
-
-@@@
-state before cycle 17 starts
-	pc 4
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 3
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 1 1
-		pcPlus1 4
-	IDEX:
-		instruction add 1 2 1
-		pcPlus1 3
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 8
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 3
-	WBEND:
-		instruction noop 0 0 0
-		writeData 3
-add 1 2 1
-
-@@@
-state before cycle 18 starts
-	pc 5
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 3
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 0 65533
-		pcPlus1 5
-	IDEX:
-		instruction beq 0 1 1
-		pcPlus1 4
-		readRegA 3
-		readRegB -1
-		offset 1
-	EXMEM:
-		instruction add 1 2 1
-		branchTarget 3
-		aluResult 2
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 3
-	WBEND:
-		instruction noop 0 0 0
-		writeData 3
-beq 0 1 1
-
-@@@
-state before cycle 19 starts
-	pc 6
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 3
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 6
-	IDEX:
-		instruction beq 0 0 65533
-		pcPlus1 5
-		readRegA 0
-		readRegB 2
-		offset 1
-	EXMEM:
-		instruction beq 0 1 1
-		branchTarget 5
-		aluResult 0
-		readRegB -1
-	MEMWB:
-		instruction add 1 2 1
-		writeData 2
-	WBEND:
-		instruction noop 0 0 0
-		writeData 3
-beq 0 0 65533
-
-@@@
-state before cycle 20 starts
-	pc 7
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 2
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction halt 0 0 0
-		pcPlus1 7
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 6
-		readRegA 0
-		readRegB 0
-		offset -3
-	EXMEM:
-		instruction beq 0 0 65533
-		branchTarget 6
-		aluResult 1
-		readRegB 2
-	MEMWB:
-		instruction beq 0 1 1
-		writeData 2
-	WBEND:
-		instruction add 1 2 1
-		writeData 2
-noop 0 0 0
-
-@@@
-state before cycle 21 starts
-	pc 2
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 2
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 8
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 7
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 3
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction beq 0 0 65533
-		writeData 2
-	WBEND:
-		instruction beq 0 1 1
-		writeData 2
-noop 0 0 0
-
-@@@
-state before cycle 22 starts
-	pc 3
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 2
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction add 1 2 1
-		pcPlus1 3
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 8
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 7
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 2
-	WBEND:
-		instruction beq 0 0 65533
-		writeData 2
-noop 0 0 0
-
-@@@
-state before cycle 23 starts
-	pc 4
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 2
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 1 1
-		pcPlus1 4
-	IDEX:
-		instruction add 1 2 1
-		pcPlus1 3
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 8
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 2
-	WBEND:
-		instruction noop 0 0 0
-		writeData 2
-add 1 2 1
-
-@@@
-state before cycle 24 starts
-	pc 5
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 2
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 0 65533
-		pcPlus1 5
-	IDEX:
-		instruction beq 0 1 1
-		pcPlus1 4
-		readRegA 2
-		readRegB -1
-		offset 1
-	EXMEM:
-		instruction add 1 2 1
-		branchTarget 3
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 2
-	WBEND:
-		instruction noop 0 0 0
-		writeData 2
-beq 0 1 1
-
-@@@
-state before cycle 25 starts
-	pc 6
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 2
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 6
-	IDEX:
-		instruction beq 0 0 65533
-		pcPlus1 5
-		readRegA 0
-		readRegB 1
-		offset 1
-	EXMEM:
-		instruction beq 0 1 1
-		branchTarget 5
-		aluResult 0
-		readRegB -1
-	MEMWB:
-		instruction add 1 2 1
-		writeData 1
-	WBEND:
-		instruction noop 0 0 0
-		writeData 2
-beq 0 0 65533
-
-@@@
-state before cycle 26 starts
-	pc 7
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 1
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction halt 0 0 0
-		pcPlus1 7
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 6
-		readRegA 0
-		readRegB 0
-		offset -3
-	EXMEM:
-		instruction beq 0 0 65533
-		branchTarget 6
-		aluResult 1
-		readRegB 1
-	MEMWB:
-		instruction beq 0 1 1
-		writeData 1
-	WBEND:
-		instruction add 1 2 1
-		writeData 1
-noop 0 0 0
-
-@@@
-state before cycle 27 starts
-	pc 2
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 1
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 8
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 7
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 3
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction beq 0 0 65533
-		writeData 1
-	WBEND:
-		instruction beq 0 1 1
-		writeData 1
-noop 0 0 0
-
-@@@
-state before cycle 28 starts
-	pc 3
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 1
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction add 1 2 1
-		pcPlus1 3
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 8
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 7
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 1
-	WBEND:
-		instruction beq 0 0 65533
-		writeData 1
-noop 0 0 0
-
-@@@
-state before cycle 29 starts
-	pc 4
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 1
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 1 1
-		pcPlus1 4
-	IDEX:
-		instruction add 1 2 1
-		pcPlus1 3
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 8
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 1
-	WBEND:
-		instruction noop 0 0 0
-		writeData 1
-add 1 2 1
-
-@@@
-state before cycle 30 starts
-	pc 5
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 1
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction beq 0 0 65533
-		pcPlus1 5
-	IDEX:
-		instruction beq 0 1 1
-		pcPlus1 4
-		readRegA 1
-		readRegB -1
-		offset 1
-	EXMEM:
-		instruction add 1 2 1
-		branchTarget 3
-		aluResult 0
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 1
-	WBEND:
-		instruction noop 0 0 0
-		writeData 1
-beq 0 1 1
-
-@@@
-state before cycle 31 starts
-	pc 6
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 1
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 6
-	IDEX:
-		instruction beq 0 0 65533
-		pcPlus1 5
-		readRegA 0
-		readRegB 0
-		offset 1
-	EXMEM:
-		instruction beq 0 1 1
-		branchTarget 5
-		aluResult 1
-		readRegB -1
-	MEMWB:
-		instruction add 1 2 1
-		writeData 0
-	WBEND:
-		instruction noop 0 0 0
-		writeData 1
-beq 0 0 65533
-
-@@@
-state before cycle 32 starts
-	pc 5
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] -1
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
 	registers:
 		reg[ 0 ] 0
 		reg[ 1 ] 0
-		reg[ 2 ] -1
+		reg[ 2 ] 0
 		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 7
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 6
-		readRegA 0
-		readRegB 0
-		offset -3
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 6
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction beq 0 1 1
-		writeData 0
-	WBEND:
-		instruction add 1 2 1
-		writeData 0
-noop 0 0 0
-
-@@@
-state before cycle 33 starts
-	pc 6
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 0
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction noop 0 0 0
-		pcPlus1 6
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 7
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 3
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 0
-	WBEND:
-		instruction beq 0 1 1
-		writeData 0
-noop 0 0 0
-
-@@@
-state before cycle 34 starts
-	pc 7
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 0
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction halt 0 0 0
-		pcPlus1 7
-	IDEX:
-		instruction noop 0 0 0
-		pcPlus1 6
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 7
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 0
-	WBEND:
-		instruction noop 0 0 0
-		writeData 0
-noop 0 0 0
-
-@@@
-state before cycle 35 starts
-	pc 8
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 0
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction add 0 0 5
-		pcPlus1 8
-	IDEX:
-		instruction halt 0 0 0
-		pcPlus1 7
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction noop 0 0 0
-		branchTarget 6
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 0
-	WBEND:
-		instruction noop 0 0 0
-		writeData 0
-halt 0 0 0
-
-@@@
-state before cycle 36 starts
-	pc 9
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 0
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
-		reg[ 5 ] 0
-		reg[ 6 ] 0
-		reg[ 7 ] 0
-	IFID:
-		instruction data 7 7 65535
-		pcPlus1 9
-	IDEX:
-		instruction add 0 0 5
-		pcPlus1 8
-		readRegA 0
-		readRegB 0
-		offset 0
-	EXMEM:
-		instruction halt 0 0 0
-		branchTarget 7
-		aluResult 1
-		readRegB 0
-	MEMWB:
-		instruction noop 0 0 0
-		writeData 0
-	WBEND:
-		instruction noop 0 0 0
-		writeData 0
-add 0 0 5
-
-@@@
-state before cycle 37 starts
-	pc 10
-	data memory:
-		dataMem[ 0 ] 8454151
-		dataMem[ 1 ] 8519688
-		dataMem[ 2 ] 655361
-		dataMem[ 3 ] 16842753
-		dataMem[ 4 ] 16842749
-		dataMem[ 5 ] 29360128
-		dataMem[ 6 ] 25165824
-		dataMem[ 7 ] 5
-		dataMem[ 8 ] -1
-	registers:
-		reg[ 0 ] 0
-		reg[ 1 ] 0
-		reg[ 2 ] -1
-		reg[ 3 ] 0
-		reg[ 4 ] 0
+		reg[ 4 ] -1
 		reg[ 5 ] 0
 		reg[ 6 ] 0
 		reg[ 7 ] 0
 	IFID:
 		instruction add 0 0 0
-		pcPlus1 10
+		pcPlus1 6
 	IDEX:
-		instruction data 7 7 65535
-		pcPlus1 9
+		instruction halt 0 0 0
+		pcPlus1 5
+		readRegA -1
+		readRegB 0
+		offset 6
+	EXMEM:
+		instruction add 4 5 6
+		branchTarget 5
+		aluResult -1
+		readRegB -1
+	MEMWB:
+		instruction sw 3 4 1
+		writeData -1
+	WBEND:
+		instruction nand 2 3 4
+		writeData -1
+halt 0 0 0
+
+@@@
+state before cycle 7 starts
+	pc 7
+	data memory:
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] -1
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 0
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] -1
+		reg[ 5 ] 0
+		reg[ 6 ] 0
+		reg[ 7 ] 0
+	IFID:
+		instruction add 0 0 0
+		pcPlus1 7
+	IDEX:
+		instruction add 0 0 0
+		pcPlus1 6
 		readRegA 0
 		readRegB 0
-		offset 5
+		offset 0
 	EXMEM:
-		instruction add 0 0 5
-		branchTarget 8
+		instruction halt 0 0 0
+		branchTarget 11
+		aluResult -1
+		readRegB 0
+	MEMWB:
+		instruction add 4 5 6
+		writeData -1
+	WBEND:
+		instruction sw 3 4 1
+		writeData -1
+add 0 0 0
+
+@@@
+state before cycle 8 starts
+	pc 8
+	data memory:
+		dataMem[ 0 ] 655363
+		dataMem[ 1 ] -1
+		dataMem[ 2 ] 14417921
+		dataMem[ 3 ] 2424838
+		dataMem[ 4 ] 25165824
+	registers:
+		reg[ 0 ] 0
+		reg[ 1 ] 0
+		reg[ 2 ] 0
+		reg[ 3 ] 0
+		reg[ 4 ] -1
+		reg[ 5 ] 0
+		reg[ 6 ] -1
+		reg[ 7 ] 0
+	IFID:
+		instruction add 0 0 0
+		pcPlus1 8
+	IDEX:
+		instruction add 0 0 0
+		pcPlus1 7
+		readRegA 0
+		readRegB 0
+		offset 0
+	EXMEM:
+		instruction add 0 0 0
+		branchTarget 6
 		aluResult 0
 		readRegB 0
 	MEMWB:
 		instruction halt 0 0 0
-		writeData 0
+		writeData -1
 	WBEND:
-		instruction noop 0 0 0
-		writeData 0
+		instruction add 4 5 6
+		writeData -1
 machine halted
-total of 37 cycles executed
+total of 8 cycles executed
